@@ -1,0 +1,17 @@
+.app{
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 600px;
+}
+
+.img{
+  height: 40px;
+}
+
+.block{
+  margin-top: 20px;
+  background-color: rgba(205, 214, 219, 0.3);
+  border-radius: 5px;
+ padding: 5px 5px 5px 5px;
+}

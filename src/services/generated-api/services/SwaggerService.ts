@@ -35,10 +35,12 @@ password?: string,
 email,
 password,
 timeSpent,
+comment,
 }: {
 email?: string,
 password?: string,
 timeSpent?: string,
+comment?: string,
 }): Promise<any> {
         const result = await __request({
             method: 'POST',
@@ -49,6 +51,7 @@ timeSpent?: string,
             },
             query: {
                 'timeSpent': timeSpent,
+                'comment': comment,
             },
         });
         return result.body;

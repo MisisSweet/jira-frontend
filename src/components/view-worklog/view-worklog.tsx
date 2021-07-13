@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import './view-worklog.css';
 import {SwaggerService} from '../../services/generated-api/services/SwaggerService';
 import loacalStorageService from '../../services/local-storage';
+import { Comments } from '../../services/models/comment';
 
 export default class ViewWorklog extends Component{
 
@@ -19,13 +20,13 @@ export default class ViewWorklog extends Component{
     })
   }
 
-  // buildCommentPanel(comment: Comments){
-  //   return (
-  //   <div>
-  //     {comment.content?.map(({content})=>content.map(c1=>c1.text))}
-  //   </div>
-  //   );
-  // }
+  buildCommentPanel(comment: Comments){
+    return (
+    <div>
+      {comment.content?.map(({content})=>content?.map(c1=><p>{c1.text}</p>))}
+    </div>
+    );
+  }
 
   render(){
     const {worklog}=this.state;
@@ -46,7 +47,7 @@ export default class ViewWorklog extends Component{
             <span> в </span>
             {created}
           </div>
-          {/* {comment?this.buildCommentPanel(comment):""} */}
+          {comment?this.buildCommentPanel(comment):""}
           <div>
             <button className="btn btn-danger mt-2" onClick={e=>{
               const email='margarita.semashko770@gmail.com';

@@ -1,26 +1,25 @@
 import React, {Component} from 'react';
 import { SwaggerService } from '../../services/generated-api';
+import loacalStorageService from '../../services/local-storage';
 import './create-worklog.css';
 
 export default class CreateWorklog extends Component{
  
   state={
-    timeSpent: ''
+    timeSpent: '',
+    comment: ''
   }
 
 
   render(){
-    
-
     return(
       <form className="form" onSubmit={e=>{
         e.preventDefault();
-        const password='at2uuC6E364EeMjBbfLf6B5A';
-        const email='margarita.semashko770@gmail.com';
-        const {timeSpent}=this.state;
-        SwaggerService.postSwaggerService({email,password, timeSpent});
+        const {timeSpent, comment}=this.state;
+        SwaggerService.postSwaggerService({email: loacalStorageService.getEmail()!,password:loacalStorageService.getPassword()!, timeSpent, comment});
         this.setState({
-          timeSpent:''
+          timeSpent:'',
+          comment: ''
         })
       }}>
         <div className="form-group">
@@ -35,7 +34,12 @@ export default class CreateWorklog extends Component{
         </div>
         <div className="form-group">
           <label className="form-label mt-4">Комментарий</label>
-          <textarea className="form-control"></textarea>
+          <textarea className="form-control"value={this.state.comment}
+          onChange={e=>{
+            this.setState({
+              comment: e.target.value
+            })
+          }}></textarea>
         </div>
         <button className="btn btn-primary"> Записать</button>
       </form>

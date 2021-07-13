@@ -52,7 +52,11 @@ export default class ViewWorklog extends Component{
             <button className="btn btn-danger mt-2" onClick={e=>{
               const email='margarita.semashko770@gmail.com';
               const password='at2uuC6E364EeMjBbfLf6B5A';
-              SwaggerService.deleteSwaggerService({idworklog: id, email, password});
+              SwaggerService.deleteSwaggerService({idworklog: id, email, password}).then(res=>{
+                this.setState({
+                  worklog: this.state.worklog
+                })
+              });
             }}>Удалить</button>
           </div>
         </div>

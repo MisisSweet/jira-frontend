@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import './login-panel.css';
-import { Link } from 'react-router-dom';
 import loacalStorageService from '../../services/local-storage';
 
 export default class LoginPanel extends Component{

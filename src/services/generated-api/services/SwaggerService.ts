@@ -72,7 +72,7 @@ password?: string,
 }): Promise<any> {
         const result = await __request({
             method: 'DELETE',
-            path: `/api/Swagger/DeleteLoan/${idworklog}`,
+            path: `/api/Swagger/DeleteWorklog/${idworklog}`,
             headers: {
                 'email': email,
                 'password': password,

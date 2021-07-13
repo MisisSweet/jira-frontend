@@ -16,7 +16,6 @@ export default class CreateWorklog extends Component{
         e.preventDefault();
         const {timeSpent, comment}=this.state;
         SwaggerService.postSwaggerService({email: loacalStorageService.getEmail()!,password:loacalStorageService.getPassword()!, timeSpent, comment})
-        .then(res=>console.log(JSON.parse(res)));
         this.setState({
           timeSpent:'',
           comment: ''

@@ -1,4 +1,3 @@
-import React from "react";
 
 const EMAIL_KEY='EMAIL';
 const PASSWORD_KEY='PASSWORD';

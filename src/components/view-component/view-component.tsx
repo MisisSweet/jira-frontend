@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { SwaggerService } from '../../services/generated-api';
 import loacalStorageService from '../../services/local-storage';
 import { Worklogs } from '../../services/models/worklog';
-import { worklogApi } from '../../store/worklog';
 import CreateWorklog from '../create-worklog';
 import Worklog from '../worklog';
 
@@ -11,14 +10,20 @@ export default class View extends Component {
         worklog: []
     }
 
-    componentDidMount(){
-        worklogApi.getAll();
+    swagger(){
         SwaggerService.getSwaggerService({email: loacalStorageService.getEmail()!,password: loacalStorageService.getPassword()!}).then(res=>{
-        let data=JSON.parse(res)
-        this.setState({
-            worklog: data.worklogs
+            let data=JSON.parse(res)
+            this.setState({
+                worklog: data.worklogs
+            })
         })
-        })
+    }
+    componentDidMount(){
+        this.swagger();
+    }
+
+    componentDidUpdate(){
+        this.swagger();
     }
 
     render() {
@@ -31,7 +36,7 @@ export default class View extends Component {
         )
     }
 
-    onDelete(worklog: Worklogs) {
-        SwaggerService.deleteSwaggerService({idworklog: worklog.id, email: loacalStorageService.getEmail()!, password: loacalStorageService.getPassword()!})
+    async onDelete(worklog: Worklogs) {
+        await SwaggerService.deleteSwaggerService({idworklog: worklog.id, email: loacalStorageService.getEmail()!, password: loacalStorageService.getPassword()!})
     }
 }

@@ -4,12 +4,11 @@ import loacalStorageService from '../../services/local-storage';
 import './create-worklog.css';
 
 export default class CreateWorklog extends Component{
- 
+
   state={
     timeSpent: '',
     comment: ''
   }
-
 
   render(){
     return(

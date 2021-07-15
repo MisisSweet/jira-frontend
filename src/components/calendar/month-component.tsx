@@ -26,14 +26,13 @@ export class MonthComponent extends Component<MonthComponentProps>{
     render() {
         const { year, number, month } = this.props;
         const countWeeks = weeksCount(year, number)
-
         const lastDateOfMonth = new Date(year, number + 1, 0).getDate();
 
         return (
-            <table className="calendar-month w-100">
+            <table className="calendar-month w-100 table table-hover">
                 <thead className="calendar-month-header">
                     <tr>
-                        <td>№</td>
+                        <td></td>
                         <td>пн</td>
                         <td>вт</td>
                         <td>ср</td>
@@ -44,11 +43,15 @@ export class MonthComponent extends Component<MonthComponentProps>{
                     </tr>
                 </thead>
                 <tbody className="calendar-month-body">
-                    {Array.apply(0, Array(countWeeks)).map((v, i) => {
-                        var dt = new Date(year, number, (1 + 7 * i) % lastDateOfMonth);
-                        var firstDayOfWeek = new Date(dt.setDate(dt.getDate() - dt.getDay() + 1));
-                        return <WeekComponent number={i + 1} firstDay={firstDayOfWeek} week={month?.weeks[i]} key={i} />
-                    })}
+                {Array.apply(0, Array(countWeeks)).map((v, i) => {
+                    let day = (0 + (7 * i)) % lastDateOfMonth, monthNumber = number;
+                    if (i === countWeeks - 1 && day < 7) {
+                        monthNumber++;
+                    }
+                    var dt = new Date(year, monthNumber, day);
+                    var firstDayOfWeek = new Date(dt.setDate(dt.getDate() - dt.getDay() + 1));
+                    return <WeekComponent number={i + 1} firstDay={firstDayOfWeek} week={month?.weeks[i]} key={i} />
+                })}
                 </tbody>
             </table>
         )

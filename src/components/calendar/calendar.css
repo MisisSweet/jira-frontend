@@ -23,7 +23,6 @@
 .calendar-month{
     margin-left: auto;
     margin-right: auto;
-    border-radius: 3px;
 }
 .calendar-month-header{
 
@@ -46,14 +45,20 @@
 /*стили DayComponent*/
 .calendar-day{
     border: 1px solid rgb(121, 126, 128);
-    margin-left: auto;
-    margin-right: auto;
 }
 .calendar-day-disable{
     opacity: 0.5;
 }
 
 .calendar-day-holiday{
-    border: 1px solid rgb(107, 59, 59);
+    border: 1px solid rgb(165, 103, 103);
     background-color: rgb(175, 60, 60);
+}
+
+.calendar-day-current{
+    border-width: 2px !important;
+    font-size: 1.1em;
+    font-weight: 700;
+    font-style: italic;
+    background-color: rgb(51, 102, 119);
 }

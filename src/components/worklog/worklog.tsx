@@ -1,8 +1,7 @@
-/* eslint-disable jsx-a11y/alt-text */
 import React, { Component } from 'react';
 import './worklog.css';
-import { Comments } from '../../services/models/comment';
-import { Worklogs } from '../../services/models/worklog';
+import { Comments } from '../../services/models/Worklog/comment';
+import { Worklogs } from '../../services/models/Worklog/worklog';
 
 interface WorklogProps {
   worklog: Worklogs,
@@ -30,7 +29,7 @@ export default class ViewWorklog extends Component<WorklogProps, WorklogState> {
       <React.Fragment>
         <div className="block" key={id}>
           <div className="block-element">
-            <img className="img"
+            <img className="img mr-1"
               src={"https://secure.gravatar.com/avatar/5f60b4a03bb075cd7c04c6056f04d186?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Fdefault-avatar-1.png"}></img>
             {displayName}
             <span> добавил запись в журнал </span>
@@ -56,3 +55,5 @@ export default class ViewWorklog extends Component<WorklogProps, WorklogState> {
   }
 
 }
+
+

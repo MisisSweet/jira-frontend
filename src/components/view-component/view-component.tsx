@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { SwaggerService } from '../../services/generated-api';
 import loacalStorageService from '../../services/local-storage';
-import { Worklogs } from '../../services/models/worklog';
+import { Worklogs } from '../../services/models/Worklog/worklog';
+import Calendars from '../calendar';
 import CreateWorklog from '../create-worklog';
+import Header from '../header';
 import Worklog from '../worklog';
+import './view-component.css'
 
 export default class View extends Component {
     state = {
@@ -29,9 +32,27 @@ export default class View extends Component {
     render() {
         const{worklog}=this.state;
         return (
-            <div className="app jumbotron rounded">
-                <CreateWorklog />
-                {worklog.slice(0).reverse().map(w => <Worklog worklog={w} onDelete={this.onDelete}/>)}
+            <div>
+                <Header/>
+                <div className=" view jumbotron rounded ">
+                    <div className="mx-auto">
+                    <h4 className="text">MT-3</h4>
+                    <div className="row">
+                        <div className="col-3 align-self-start">
+                            <h6>Календарь</h6>
+                            <Calendars/>
+                        </div>
+                        <div className="col-4 align-self-start">
+                            <h6>Запись работы</h6>
+                            <CreateWorklog />
+                        </div>
+                        <div className="worklog-card col-5">
+                            <h6>Журнал работ</h6>
+                            {worklog.slice(0).reverse().map(w => <Worklog worklog={w} onDelete={this.onDelete}/>)}
+                        </div>
+                    </div>
+                    </div>
+                </div>
             </div>
         )
     }

@@ -1,4 +1,4 @@
-import { Worklogs } from "../../services/models/worklog";
+import { Worklogs } from "../../services/models/Worklog/worklog";
 import {ActionsTypes} from '../index'
 
 export const worklogActions={

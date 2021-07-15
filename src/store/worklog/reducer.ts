@@ -1,4 +1,4 @@
-import { Worklogs } from "../../services/models/worklog";
+import { Worklogs } from "../../services/models/Worklog/worklog";
 import { WorklogActions } from "./actions";
 import { Reducer } from 'redux';
 import produce, { Draft } from 'immer';

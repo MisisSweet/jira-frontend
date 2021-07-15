@@ -13,6 +13,8 @@
 }
 .calendar-header-title{
     padding: 0.5em 1em;
+    display: flex;
+    flex-direction: column;
 }
 .calendar-body{
     padding: 0.5em;
@@ -61,4 +63,14 @@
     font-weight: 700;
     font-style: italic;
     background-color: rgb(51, 102, 119);
+}
+
+.calendar-day-work-hour{
+    display: inline-block;
+    width: 100%;
+    text-align: end;
+}
+
+.calendar-day-date{
+    margin: auto;
 }

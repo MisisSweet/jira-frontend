@@ -1,6 +1,6 @@
 import { Month } from "./month";
 
-export type Yaer = {
-    number: Number,
+export type Year = {
+    number: number,
     months: Array<Month>
 }

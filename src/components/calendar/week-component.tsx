@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { Day } from "../../services/models/Calendar/day";
 import { Week } from "../../services/models/Calendar/week";
 import { DayComponent } from "./day-component";
 
@@ -8,31 +9,51 @@ function addDays(date: Date, days: number): Date {
     return copiedDate;
 }
 
+function compareDates(dateA: Date, dateB?: Date): Boolean {
+    const d = new Date(dateA);
+    if(!dateB){
+        return false;
+    }
+    return d.getFullYear() === dateB.getFullYear()
+        && d.getMonth() === dateB.getMonth()
+        && d.getDate() === dateB.getDate();;
+}
+
 interface WeekComponentProps {
     number: number,
     firstDay: Date,
     week?: Week,
+    selectedDate?: Date,
+    onDayClick?:Function
 }
 export class WeekComponent extends Component<WeekComponentProps> {
     render() {
-        const { number, week, firstDay } = this.props;
+        const { number, week, firstDay,selectedDate,onDayClick } = this.props;
         const lastDate = addDays(firstDay, 6).getDate();
         return (
             <tr className="calendar-week">
-                <td className="calendar-week-header">
-                    {number}
-                </td>
-                {Array.apply(0, Array(7)).map((v, i) => {
-                    const date = addDays(firstDay, i);
-                    var disable = false;
-                    if (number === 1) {
-                        disable = date.getDate() > lastDate;
-                    } else {
-                        disable = date.getDate() < firstDay.getDate();
-                    }
-                    return <DayComponent disable={disable} day={week?.days[i]} date={date} key={i}/>
-                })}
-            </tr>
+            <td className="calendar-week-header">
+                {number}
+            </td>
+            {Array.apply(0, Array(7)).map((v, i) => {
+                const date = addDays(firstDay, i);
+                var disable = false;
+                if (number === 1) {
+                    disable = date.getDate() > lastDate;
+                } else {
+                    disable = date.getDate() < firstDay.getDate();
+                }
+                return <DayComponent 
+                key={i}
+                disable={disable}
+                selected={compareDates(date, selectedDate)} 
+                day={week?.days.find((value: Day) => compareDates(value.date, date))} 
+                date={date} 
+                onClick={onDayClick}
+                />
+            })}
+        </tr>
+
         )
     }
 }

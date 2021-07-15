@@ -46,12 +46,19 @@
 /*-----------------------------------------------------------------*/
 /*стили DayComponent*/
 .calendar-day{
+    cursor: pointer;
     border: 1px solid rgb(121, 126, 128);
+}
+.calendar-day:hover *{
+    font-size: 1.1em;
+    font-weight: 700;
 }
 .calendar-day-disable{
     opacity: 0.5;
 }
-
+.calendar-day-selected{
+    border: 2px solid white !important;
+}
 .calendar-day-holiday{
     border: 1px solid rgb(165, 103, 103);
     background-color: rgb(175, 60, 60);
@@ -59,12 +66,13 @@
 
 .calendar-day-current{
     border-width: 2px !important;
+    border-color:rgb(42, 49, 54);
+}
+.calendar-day-current *{
     font-size: 1.1em;
     font-weight: 700;
     font-style: italic;
-    background-color: rgb(51, 102, 119);
 }
-
 .calendar-day-work-hour{
     display: inline-block;
     width: 100%;
@@ -73,4 +81,14 @@
 
 .calendar-day-date{
     margin: auto;
+}
+
+.calendar-day-short{
+    background-color: rgb(103, 165, 113);
+}
+.calendar-day-sick{
+    background-color: rgb(103, 117, 165);
+}
+.calendar-day-vacation{
+    background-color: rgb(165, 164, 103);
 }

@@ -1,11 +1,14 @@
 import { Component } from "react";
 import { Month } from "../../services/models/Calendar/month";
+import { Week } from "../../services/models/Calendar/week";
 import { WeekComponent } from "./week-component";
 
 interface MonthComponentProps {
     number: number,
     year: number,
     month?: Month,
+    selectedDate?: Date,
+    onDayClick?:Function
 }
 var weeksCount = function (year: number, month_number: number) {
     var firstOfMonth = new Date(year, month_number, 1);
@@ -24,7 +27,7 @@ var weeksCount = function (year: number, month_number: number) {
 
 export class MonthComponent extends Component<MonthComponentProps>{
     render() {
-        const { year, number, month } = this.props;
+        const { year, number, month,selectedDate,onDayClick } = this.props;
         const countWeeks = weeksCount(year, number)
         const lastDateOfMonth = new Date(year, number + 1, 0).getDate();
 
@@ -50,7 +53,13 @@ export class MonthComponent extends Component<MonthComponentProps>{
                     }
                     var dt = new Date(year, monthNumber, day);
                     var firstDayOfWeek = new Date(dt.setDate(dt.getDate() - dt.getDay() + 1));
-                    return <WeekComponent number={i + 1} firstDay={firstDayOfWeek} week={month?.weeks[i]} key={i} />
+                    return <WeekComponent 
+                    key={i} 
+                    number={i + 1} 
+                    firstDay={firstDayOfWeek} 
+                    week={month?.weeks.find((value:Week)=>value.number===i+1)} 
+                    selectedDate={selectedDate}
+                    onDayClick={onDayClick}/>
                 })}
                 </tbody>
             </table>

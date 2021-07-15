@@ -1,26 +1,39 @@
 import { Component } from "react";
+import { Month } from "../../services/models/Calendar/month";
+import { Year } from "../../services/models/Calendar/year";
 import './calendar.css'
 import { MonthComponent } from "./month-component";
 
 
 interface CalendarState {
-    currentDay: Date,
+    selectedDate: Date,
     selectedYear: number,
     selectedMonth: number,
 }
 interface CalendarProps {
+    years?: Array<Year>,
+    selectedDate?: Date,
+    onChangeSelectedDate?: Function,
+    onChangeSelectedMonth?: Function,
+    onChangeSelectedYear?: Function,
 }
 export default class Calendar extends Component<CalendarProps, CalendarState> {
     constructor(props: CalendarProps) {
         super(props);
+        const {selectedDate} = props;
+        var date = selectedDate ||new Date();
+
         this.state = {
-            currentDay: new Date(),
-            selectedMonth: new Date().getMonth(),
-            selectedYear: new Date().getFullYear()
+            selectedDate: date,
+            selectedMonth: date.getMonth(),
+            selectedYear: date.getFullYear()
         }
     }
+
     render() {
-        const { selectedYear, selectedMonth } = this.state;
+        const { selectedYear, selectedMonth,selectedDate } = this.state;
+        const { years } = this.props;
+        const selectYear = years?.find((value: Year) => value.number === selectedYear)
         const date = new Date(`${selectedYear}-${selectedMonth + 1}-1`)
         //здесь можно будет замутить локализацию
         let mo = new Intl.DateTimeFormat('ru', { month: 'long' }).format(date);
@@ -43,14 +56,29 @@ export default class Calendar extends Component<CalendarProps, CalendarState> {
                     <button  className="btn btn-primary" onClick={() => { this.changeMonth(1) }}>→</button>
                 </div>
                 <div className="calendar-body">
-                    <MonthComponent number={selectedMonth} year={selectedYear} />
-                </div>
+                <MonthComponent 
+                number={selectedMonth} 
+                year={selectedYear} 
+                month={selectYear?.months.find((value: Month) => value.number === selectedMonth)} 
+                selectedDate={selectedDate}
+                onDayClick={this.handleChangeSelectedDay}
+                />
+            </div>
             </div>
         )
     }
-
-    changeMonth(value: number) {
+    handleChangeSelectedDay=(date:Date)=>{
+        const {onChangeSelectedDate} = this.props
+        if(onChangeSelectedDate){
+            onChangeSelectedDate(date);
+        }
+        this.setState({
+            selectedDate:date
+        })
+    }
+    changeMonth=(value: number)=> {
         const { selectedMonth, selectedYear } = this.state;
+        const { onChangeSelectedMonth} = this.props;
         var newMonth = selectedMonth + value;
         var newYear = selectedYear;
         if (newMonth < 0) {
@@ -61,15 +89,25 @@ export default class Calendar extends Component<CalendarProps, CalendarState> {
             newMonth = 0;
             newYear++;
         }
+        if(newYear!==selectedYear){
+            this.changeYear(newYear);
+        }
+        if(onChangeSelectedMonth){
+            onChangeSelectedMonth(newMonth);
+        }
         this.setState({
             selectedMonth: newMonth,
-            selectedYear: newYear,
         })
     }
 
     changeYear(value: number) {
+        const { onChangeSelectedYear} = this.props;
+        console.log(value)
+        if(onChangeSelectedYear){
+            onChangeSelectedYear(value);
+        }
         this.setState({
-            selectedYear: this.state.selectedYear + value,
+            selectedYear: value,
         })
     }
 }

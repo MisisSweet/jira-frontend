@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { SwaggerService } from '../../services/generated-api';
 import loacalStorageService from '../../services/local-storage';
 import { Worklogs } from '../../services/models/Worklog/worklog';
-import Calendars from '../calendar';
+import Calendar from '../calendar';
 import CreateWorklog from '../create-worklog';
 import Header from '../header';
 import Worklog from '../worklog';
 import './view-component.css'
+import {json} from '../../json'
 
 export default class View extends Component {
     state = {
@@ -38,6 +39,7 @@ export default class View extends Component {
         const{worklog}=this.state;
         const numberOfItems = this.state.showMore ? worklog.length : 3;
         let i=1;
+        const years = JSON.parse(json)
         return (
             <div>
                 <Header/>
@@ -45,15 +47,15 @@ export default class View extends Component {
                     <div className="mx-auto">
                     <h4 className="text">MT-3</h4>
                     <div className="row">
-                        <div className="col-3 align-self-start">
+                        <div className="col-sm align-self-start">
                             <h6>Календарь</h6>
-                            <Calendars/>
+                            <Calendar years={years}/>
                         </div>
-                        <div className="col-4 align-self-start">
+                        <div className="col-sm-4 align-self-start">
                             <h6>Запись работы</h6>
                             <CreateWorklog />
                         </div>
-                        <div className="worklog-card col-5">
+                        <div className="col-sm-4 worklog-card col-5">
                             <h6>Журнал работ</h6>
                             {worklog.reverse().slice(0, numberOfItems).map((w) => <Worklog worklog={w} onDelete={this.onDelete} key={i++}/>)}
                             <button className="btn btn-primary w-100" onClick={()=> this.handleClick()}>Показать больше</button>

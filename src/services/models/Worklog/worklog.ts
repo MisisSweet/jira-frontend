@@ -7,5 +7,4 @@ export type Worklogs={
     author: Author;
     created: string;
     comment: Comments;
-
 }

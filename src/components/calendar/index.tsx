@@ -1,3 +1,3 @@
-import Calendars from './calendar';
+import Calendar from './сalendar';
 
-export default Calendars;
+export default Calendar;

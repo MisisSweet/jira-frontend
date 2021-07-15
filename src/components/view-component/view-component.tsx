@@ -10,7 +10,8 @@ import './view-component.css'
 
 export default class View extends Component {
     state = {
-        worklog: []
+        worklog: [],
+        showMore: false
     }
 
     swagger(){
@@ -29,8 +30,14 @@ export default class View extends Component {
         this.swagger();
     }
 
+    handleClick() {
+        this.setState({showMore: true})
+    }
+
     render() {
         const{worklog}=this.state;
+        const numberOfItems = this.state.showMore ? worklog.length : 3;
+        let i=1;
         return (
             <div>
                 <Header/>
@@ -48,7 +55,8 @@ export default class View extends Component {
                         </div>
                         <div className="worklog-card col-5">
                             <h6>Журнал работ</h6>
-                            {worklog.slice(0).reverse().map(w => <Worklog worklog={w} onDelete={this.onDelete}/>)}
+                            {worklog.reverse().slice(0, numberOfItems).map((w) => <Worklog worklog={w} onDelete={this.onDelete} key={i++}/>)}
+                            <button className="btn btn-primary w-100" onClick={()=> this.handleClick()}>Показать больше</button>
                         </div>
                     </div>
                     </div>

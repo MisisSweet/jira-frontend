@@ -3,3 +3,57 @@
     border-radius: 5px;
     padding: 10px 10px 10px 10px;
 }
+
+/*стили Calendar*/
+
+.calendar-header{
+    display: flex;
+    justify-content: center;
+    padding: 0.25em 0em;
+}
+.calendar-header-title{
+    padding: 0.5em 1em;
+}
+.calendar-body{
+    padding: 0.5em;
+    
+}
+/*-----------------------------------------------------------------*/
+/*стили MonthComponent*/
+.calendar-month{
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 3px;
+}
+.calendar-month-header{
+
+}
+.calendar-month-header td{
+    background-color: rgb(93, 111, 126);
+}
+.calendar-month-body{
+
+}
+/*-----------------------------------------------------------------*/
+/*стили WeekComponent*/
+.calendar-week{
+
+}
+.calendar-week-header{
+    background-color: rgb(39, 73, 104);
+}
+/*-----------------------------------------------------------------*/
+/*стили DayComponent*/
+.calendar-day{
+    border: 1px solid rgb(121, 126, 128);
+    margin-left: auto;
+    margin-right: auto;
+}
+.calendar-day-disable{
+    opacity: 0.5;
+}
+
+.calendar-day-holiday{
+    border: 1px solid rgb(107, 59, 59);
+    background-color: rgb(175, 60, 60);
+}

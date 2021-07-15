@@ -17,7 +17,6 @@ export class WeekComponent extends Component<WeekComponentProps> {
     render() {
         const { number, week, firstDay } = this.props;
         const lastDate = addDays(firstDay, 6).getDate();
-        console.log(lastDate)
         return (
             <tr className="calendar-week">
                 <td className="calendar-week-header">

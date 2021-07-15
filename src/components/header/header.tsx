@@ -13,7 +13,9 @@ const Header = () => {
         <div className="d-flex vyhod">
             <ul>
                 <li>
-                    <a href="./">Выход</a>
+                    <a href="./" onClick={e=>{
+                        localStorage.clear();
+                    }}>Выход</a>
                 </li>
             </ul>
         </div>

@@ -4,6 +4,30 @@
     padding: 10px 10px 10px 10px;
 }
 
+.seekday{
+    background-color: rgb(103, 117, 165);
+    width: 1em;
+    height: 1em;
+}
+
+.holiday{
+    background-color: rgb(175, 60, 60);
+    width: 1em;
+    height: 1em;
+}
+
+.vacation{
+    background-color: rgb(165, 164, 103);
+    width: 1em;
+    height: 1em;
+}
+
+.short{
+    background-color: rgb(103, 165, 113);
+    width: 1em;
+    height: 1em;
+}
+
 /*стили Calendar*/
 
 .calendar-header{
@@ -81,6 +105,7 @@
 
 .calendar-day-date{
     margin: auto;
+    font-size: 0.8em;
 }
 
 .calendar-day-short{

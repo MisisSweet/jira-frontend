@@ -11,7 +11,7 @@ export const json = `[
                             {
                                 "date": "2021-07-01T00:00:00.000Z",
                                 "workHours": 8,
-                                "type": 2
+                                "type": 4
                             },
                             {
                                 "date": "2021-07-02T00:00:00.000Z",
@@ -36,7 +36,7 @@ export const json = `[
                             {
                                 "date": "2021-07-05T00:00:00.000Z",
                                 "workHours": 8,
-                                "type": 4
+                                "type": 2
                             },
                             {
                                 "date": "2021-07-06T00:00:00.000Z",

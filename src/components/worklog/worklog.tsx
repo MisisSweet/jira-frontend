@@ -36,7 +36,7 @@ export default class ViewWorklog extends Component<WorklogProps, WorklogState> {
             {displayName}
             <span> добавил запись в журнал </span>
             {timeSpent}
-            <span> в </span>
+            <span> - </span>
             {dateformat(created, 'dd.mm.yyyy h:MM:ss TT')}
           </div>
           {comment ? this.buildCommentPanel(comment) : ""}

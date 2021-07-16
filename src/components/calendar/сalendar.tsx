@@ -57,13 +57,19 @@ export default class Calendar extends Component<CalendarProps, CalendarState> {
                 </div>
                 <div className="calendar-body">
                 <MonthComponent 
-                number={selectedMonth} 
-                year={selectedYear} 
-                month={selectYear?.months.find((value: Month) => value.number === selectedMonth)} 
-                selectedDate={selectedDate}
-                onDayClick={this.handleChangeSelectedDay}
+                    number={selectedMonth} 
+                    year={selectedYear} 
+                    month={selectYear?.months.find((value: Month) => value.number === selectedMonth)} 
+                    selectedDate={selectedDate}
+                    onDayClick={this.handleChangeSelectedDay}
                 />
-            </div>
+                </div>
+                <div className="d-flex mt-1">
+                    <div className="seekday mr-1"></div><h6 className="mr-1">Seekleave day</h6>
+                    <div className="holiday mr-1"></div><h6 className="mr-1">Выходной</h6>
+                    <div className="vacation mr-1"></div><h6 className="mr-1">Отпуск</h6>
+                    <div className="short mr-1"></div><h6 className="mr-1">Сокращённый</h6>
+                </div>
             </div>
         )
     }

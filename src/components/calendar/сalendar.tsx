@@ -65,7 +65,7 @@ export default class Calendar extends Component<CalendarProps, CalendarState> {
                 />
                 </div>
                 <div className="d-flex mt-1">
-                    <div className="seekday mr-1"></div><h6 className="mr-1">Seekleave day</h6>
+                    <div className="seekday mr-1"></div><h6 className="mr-1">Sick day</h6>
                     <div className="holiday mr-1"></div><h6 className="mr-1">Выходной</h6>
                     <div className="vacation mr-1"></div><h6 className="mr-1">Отпуск</h6>
                     <div className="short mr-1"></div><h6 className="mr-1">Сокращённый</h6>

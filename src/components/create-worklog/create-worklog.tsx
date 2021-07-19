@@ -1,48 +1,32 @@
 import React, {Component} from 'react';
-import { SwaggerService } from '../../services/generated-api';
-import loacalStorageService from '../../services/local-storage';
 import './create-worklog.css';
+import { Modal } from "react-responsive-modal";
+import "react-responsive-modal/styles.css";
+import CreateModal from './create-modal';
 
 export default class CreateWorklog extends Component{
-
   state={
-    timeSpent: '',
-    comment: ''
+    open: false
   }
 
+  onOpenModal = () => {
+    this.setState({ open: true });
+  };
+
+  onCloseModal = () => {
+    this.setState({ open: false });
+  };
+
   render(){
+    const { open } = this.state;
     return(
-      <form className="form" onSubmit={e=>{
-        e.preventDefault();
-        const {timeSpent, comment}=this.state;
-        SwaggerService.postSwaggerService({email: loacalStorageService.getEmail()!,password:loacalStorageService.getPassword()!, timeSpent, comment})
-        this.setState({
-          timeSpent:'',
-          comment: ''
-        })
-      }}>
-        <div className="form-group">
-          <label className="form-label mt-4">Время</label>
-          <input className="form-control" value={this.state.timeSpent}
-          onChange={e=>{
-            this.setState({
-              timeSpent: e.target.value
-            })
-          }}></input>
-          <small  className="form-text">Используйте формат: 2w 4d 6h 45m</small>
-        </div>
-        <div className="form-group">
-          <label className="form-label mt-4">Комментарий</label>
-          <textarea className="form-control"value={this.state.comment}
-          onChange={e=>{
-            this.setState({
-              comment: e.target.value
-            })
-          }}></textarea>
-        </div>
-        <button className="btn btn-primary"> Записать</button>
-      </form>
-    )
+      <div>
+        <button className="btn btn-primary" onClick={this.onOpenModal}>Добавить запись в журнал</button>
+        <Modal open={open} onClose={this.onCloseModal}>
+          <CreateModal/>
+        </Modal>
+      </div>
+      )
   }
 
 }

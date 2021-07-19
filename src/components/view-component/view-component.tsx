@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { SwaggerService } from '../../services/generated-api';
 import loacalStorageService from '../../services/local-storage';
-import { Worklogs } from '../../services/models/Worklog/worklog';
 import Calendar from '../calendar';
 import CreateWorklog from '../create-worklog';
 import Header from '../header';
 import Worklog from '../worklog';
 import './view-component.css'
-import {json} from '../../json'
+import {json} from '../../services/json/json'
+import { jsonWorklog } from '../../services/json/worklog';
+import { Worklogs } from '../../services/models/Worklog/worklog';
 
 export default class View extends Component {
     state = {
@@ -39,7 +40,8 @@ export default class View extends Component {
         const{worklog}=this.state;
         const numberOfItems = this.state.showMore ? worklog.length : 3;
         let i=1;
-        const years = JSON.parse(json)
+        const years = JSON.parse(json);
+        const work=JSON.parse(jsonWorklog);
         return (
             <div>
                 <Header/>
@@ -51,13 +53,11 @@ export default class View extends Component {
                             <h6>Календарь</h6>
                             <Calendar years={years}/>
                         </div>
-                        <div className="col-sm-4 align-self-start">
-                            <h6>Запись работы</h6>
+                        <div className="col-sm-8 worklog-card col-5">
+                        <h6>Запись работы</h6>
                             <CreateWorklog />
-                        </div>
-                        <div className="col-sm-4 worklog-card col-5">
                             <h6>Журнал работ</h6>
-                            {worklog.reverse().slice(0, numberOfItems).map((w) => <Worklog worklog={w} onDelete={this.onDelete} key={i++}/>)}
+                            {work.reverse().slice(0, numberOfItems).map((w: Worklogs) => <Worklog worklog={w} key={i++}/>)}
                             <button className="btn btn-primary w-100" onClick={()=> this.handleClick()}>Показать больше</button>
                         </div>
                     </div>
@@ -65,9 +65,5 @@ export default class View extends Component {
                 </div>
             </div>
         )
-    }
-
-    async onDelete(worklog: Worklogs) {
-        await SwaggerService.deleteSwaggerService({idworklog: worklog.id, email: loacalStorageService.getEmail()!, password: loacalStorageService.getPassword()!})
     }
 }

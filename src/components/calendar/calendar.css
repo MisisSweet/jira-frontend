@@ -11,7 +11,7 @@
 }
 
 .holiday{
-    background-color: rgb(175, 60, 60);
+    background-color: rgb(151, 162, 172);
     width: 1em;
     height: 1em;
 }
@@ -49,6 +49,7 @@
 .calendar-month{
     margin-left: auto;
     margin-right: auto;
+    background-color: rgb(226, 226, 226);
 }
 .calendar-month-header{
 
@@ -57,7 +58,6 @@
     background-color: rgb(93, 111, 126);
 }
 .calendar-month-body{
-
 }
 /*-----------------------------------------------------------------*/
 /*стили WeekComponent*/
@@ -72,6 +72,7 @@
 .calendar-day{
     cursor: pointer;
     border: 1px solid rgb(121, 126, 128);
+    color: black;
 }
 .calendar-day:hover *{
     font-size: 1.1em;
@@ -81,11 +82,11 @@
     opacity: 0.5;
 }
 .calendar-day-selected{
-    border: 2px solid white !important;
+    border: 2px solid rgb(34, 134, 141) !important;
 }
 .calendar-day-holiday{
-    border: 1px solid rgb(165, 103, 103);
-    background-color: rgb(175, 60, 60);
+    border: 1px solid rgb(121, 126, 128);
+    background-color: rgb(151, 162, 172);
 }
 
 .calendar-day-current{
@@ -109,7 +110,7 @@
 }
 
 .calendar-day-short{
-    background-color: rgb(103, 165, 113);
+    background-color: rgb(103, 165, 113) !important;
 }
 .calendar-day-sick{
     background-color: rgb(103, 117, 165);

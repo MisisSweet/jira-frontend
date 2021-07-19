@@ -1,6 +1,9 @@
-import  { Component } from "react";
+import  React, { Component } from "react";
 import { TypeDay } from "../../services/data/typeDay";
 import { Day } from "../../services/models/Calendar/day";
+import "react-responsive-modal/styles.css";
+import { Modal } from "react-responsive-modal";
+import CreateModal from "../create-worklog/create-modal";
 
 interface DayComponentProps {
     date: Date,
@@ -19,6 +22,22 @@ function compareDates(dateA: Date, dateB?: Date): Boolean {
         && d.getDate() === dateB.getDate();;
 }
 export class DayComponent extends Component<DayComponentProps> {
+
+    state={
+        open: false
+    }
+    
+    onCloseModal = () => {
+        this.setState({ open: false });
+    };
+
+    handleClick=()=>{
+        const { onClick,date } = this.props;
+        if(onClick){
+            onClick(date);
+            this.setState({ open: true });
+        }
+    }
 
     checkCurrentDay(date: Date) {
         var currentDate = new Date();
@@ -55,8 +74,10 @@ export class DayComponent extends Component<DayComponentProps> {
         const typeDayClass = this.getClassOfTypeDay();
         const currentDayClass = this.checkCurrentDay(date) ? ' calendar-day-current' : '';
         const selectedDayClass = selected ? ' calendar-day-selected' : '';
+        const { open } = this.state;
         return (
-            <td className={ `calendar-day`.concat(disableClass,typeDayClass,currentDayClass,selectedDayClass)} onClick={this.handleClick}>
+            <React.Fragment>
+                <td className={ `calendar-day`.concat(disableClass,typeDayClass,currentDayClass,selectedDayClass)} onClick={this.handleClick}>
                 <p className="calendar-day-date">
                     {date ? date.getDate() : 'x'}
                 </p>
@@ -64,13 +85,10 @@ export class DayComponent extends Component<DayComponentProps> {
                     {day ? day.workHours +" h" : ''}
                 </small>
             </td>
+            <Modal open={open} onClose={this.onCloseModal}>
+                <CreateModal/>
+            </Modal>
+            </React.Fragment>
         )
-    }
-
-    handleClick=()=>{
-        const { onClick,date } = this.props;
-        if(onClick){
-            onClick(date);
-        }
     }
 }

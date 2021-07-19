@@ -1,9 +1,9 @@
 import  React, { Component } from "react";
-import { TypeDay } from "../../services/data/typeDay";
-import { Day } from "../../services/models/Calendar/day";
+import { TypeDay } from "../../../services/data/typeDay";
+import { Day } from "../../../services/models/Calendar/day";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
-import CreateModal from "../create-worklog/create-modal";
+import ModalAll from "../../modal/modal";
 
 interface DayComponentProps {
     date: Date,
@@ -11,15 +11,6 @@ interface DayComponentProps {
     selected?: Boolean,
     day?: Day,
     onClick?:Function
-}
-function compareDates(dateA: Date, dateB?: Date): Boolean {
-    const d = new Date(dateA);
-    if(!dateB){
-        return false;
-    }
-    return d.getFullYear() === dateB.getFullYear()
-        && d.getMonth() === dateB.getMonth()
-        && d.getDate() === dateB.getDate();;
 }
 export class DayComponent extends Component<DayComponentProps> {
 
@@ -86,7 +77,7 @@ export class DayComponent extends Component<DayComponentProps> {
                 </small>
             </td>
             <Modal open={open} onClose={this.onCloseModal}>
-                <CreateModal/>
+                <ModalAll/>
             </Modal>
             </React.Fragment>
         )

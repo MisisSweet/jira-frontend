@@ -16,14 +16,13 @@ export default class ViewWorklog extends Component<WorklogProps, WorklogState> {
   buildCommentPanel(comment: Comments) {
     return (
       <div>
-        {comment.content?.map(({ content }) => content?.map(c1 => <p>{c1.text}</p>))}
+        {comment.content?.map(({ content }) => content?.map((c1, i) => <p key={i}>{c1.text}</p>))}
       </div>
     );
   }
 
   render() {
     const { worklog } = this.props;
-    console.log(worklog);
     const { timeSpent, author: {
       displayName
     }, created, comment, project } = worklog;

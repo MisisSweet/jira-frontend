@@ -28,6 +28,11 @@
     height: 1em;
 }
 
+.form-button{
+    display: flex;
+    justify-content: center;
+}
+
 /*стили Calendar*/
 
 .calendar-header{

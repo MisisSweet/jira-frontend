@@ -73,7 +73,7 @@ export class DayComponent extends Component<DayComponentProps> {
                     {date ? date.getDate() : 'x'}
                 </p>
                 <small className="calendar-day-work-hour">
-                    {day ? day.workHours +" h" : ''}
+                    {day ? day.timeSpent : ''}
                 </small>
             </td>
             <Modal open={open} onClose={this.onCloseModal}>

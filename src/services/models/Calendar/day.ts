@@ -1,8 +1,9 @@
 import { TypeDay } from "../../data/typeDay";
+import { Worklogs } from "../Worklog/worklog";
 
 export type Day = {
-    date: Date,
-    workHours: Number,
     type: TypeDay,
-    project: string
+    day: Date,
+    timeSpent: string,
+    worklog: Array<Worklogs>
 }

@@ -49,7 +49,7 @@ export class WeekComponent extends Component<WeekComponentProps> {
                         key={i}
                         disable={disable}
                         selected={compareDates(date, selectedDate)}
-                        day={week?.days.find((value: Day) => compareDates(value.date, date))}
+                        day={week?.days.find((value: Day) => compareDates(value.day, date))}
                         date={date}
                         onClick={onDayClick}
                     />

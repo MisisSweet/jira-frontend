@@ -123,10 +123,17 @@ export default class Calendar extends Component<CalendarProps, CalendarState>{
     }
 
     changeWeek = (value: number) => {
-        const { selectedMonth, selectedWeek, selectedYear } = this.state;
-        const { onChangeSelectedMonth } = this.props;
+        const { selectedMonth, selectedWeek} = this.state;
+        const { onChangeSelectedWeek } = this.props;
         var newWeek = selectedWeek + value;
-
+        var newMonth = selectedMonth + value;
+        
+        // if(newMonth!==selectedMonth){
+        //     this.changeMonth(newMonth-selectedMonth);
+        // }
+        if (onChangeSelectedWeek) {
+            onChangeSelectedWeek(newWeek);
+        }
         this.setState({
             selectedWeek: newWeek,
         })

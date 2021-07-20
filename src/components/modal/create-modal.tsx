@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import { threadId } from 'worker_threads';
-import { SwaggerService } from '../../services/generated-api';
-import loacalStorageService from '../../services/local-storage';
 import './modal.css';
 
 export default class CreateModal extends Component {
@@ -20,7 +17,7 @@ export default class CreateModal extends Component {
     return (
       <form className="form" onSubmit={e => {
         e.preventDefault();
-        const { timeSpent, comment } = this.state;
+        // const { timeSpent, comment } = this.state;
       }}>
         <div className="form-group">
           <label className="form-label mt-4">Проект</label>

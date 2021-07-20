@@ -2,14 +2,15 @@
 import React, { Component } from 'react';
 import './worklog.css';
 import { Comments } from '../../services/models/Worklog/comment';
-import { Worklogs } from '../../services/models/Worklog/worklog';
 import dateformat from 'dateformat';
+import { Day } from '../../services/models/Calendar/day';
+import { Worklogs } from '../../services/models/Worklog/worklog';
 
 interface WorklogProps {
-  worklog: Worklogs
+  worklog: Worklogs,
 }
 interface WorklogState {
-  worklog: Worklogs
+  worklog: Worklogs,
 }
 export default class ViewWorklog extends Component<WorklogProps, WorklogState> {
 
@@ -22,10 +23,8 @@ export default class ViewWorklog extends Component<WorklogProps, WorklogState> {
   }
 
   render() {
-    const { worklog } = this.props;
-    const { timeSpent, author: {
-      displayName
-    }, created, comment, project } = worklog;
+    const { worklog} = this.props;
+    const { timeSpent, created, author:{displayName}, project, comment } = worklog
     return (
       <React.Fragment>
         <div className="block">
@@ -40,7 +39,7 @@ export default class ViewWorklog extends Component<WorklogProps, WorklogState> {
             <span> - </span>
             {dateformat(created, 'dd.mm.yyyy h:MM:ss TT')}
           </div>
-          {comment ? this.buildCommentPanel(comment) : ""}
+          {comment?this.buildCommentPanel(comment):''}
         </div>
       </React.Fragment>
     )

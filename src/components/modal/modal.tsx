@@ -7,7 +7,7 @@ export default class ModalAll extends Component {
     }
     render() {
         const { isCompleted } = this.state;
-        const modal = isCompleted ? '' : <CreateModal />
+        const modal = isCompleted ? <CreateModal /> : <CreateModal />
         return (
             <div>
                 {modal}

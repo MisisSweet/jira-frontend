@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import { SwaggerService } from '../../services/generated-api';
-import loacalStorageService from '../../services/local-storage';
 import Calendar from '../calendar';
 import Header from '../header';
 import Worklog from '../worklog';
 import './view-component.css'
 import {json} from '../../services/json/json'
-import { jsonWorklog } from '../../services/json/worklog';
+import { Year } from '../../services/models/Calendar/year';
+import { Month } from '../../services/models/Calendar/month';
+import { Week } from '../../services/models/Calendar/week';
+import { Day } from '../../services/models/Calendar/day';
 import { Worklogs } from '../../services/models/Worklog/worklog';
-import ModalAll from '../modal/modal';
-import Modal from 'react-responsive-modal';
 
 export default class View extends Component {
     state = {
@@ -31,11 +30,9 @@ export default class View extends Component {
     };
 
     render() {
-        const{worklog, open}=this.state;
-        const numberOfItems = this.state.showMore ? worklog.length : 3;
-        let i=1;
         const years = JSON.parse(json);
-        const work=JSON.parse(jsonWorklog);
+        const numberOfItems = this.state.showMore ? 10 : 3;
+        let i=1;
         return (
             <div>
                 <Header/>
@@ -47,14 +44,20 @@ export default class View extends Component {
                             <Calendar/>
                         </div>
                         <div className="col-sm-8 worklog-card col-5">
-                        <h6>Запись работы</h6>
-                        <button className="btn btn-primary" onClick={this.onOpenModal}>Добавить запись в журнал</button>
-                            <Modal open={open} onClose={this.onCloseModal}>
-                                <ModalAll/>
-                            </Modal>
                             <h6>Журнал работ</h6>
-                            {work.reverse().slice(0, numberOfItems).map((w: Worklogs) => <Worklog worklog={w} key={i++}/>)}
+                            {years.map(
+                                (y: Year)=>y.months.map(
+                                    (m:Month)=>m.weeks.map(
+                                        (w:Week)=>w.days.reverse().slice(0, numberOfItems).map(
+                                            (d:Day)=>d.worklog.map(
+                                                (work: Worklogs)=>
+                                                <Worklog worklog={work} key={i++}/>
+                                            )
+                                            )
+                                        )))}
+                            {/* {work.reverse().slice(0, numberOfItems).map((w: Worklogs) => <Worklog day={w} key={i++}/>)} */}
                             <button className="btn btn-primary w-100" onClick={()=> this.handleClick()}>Показать больше</button>
+                            
                         </div>
                     </div>
                     </div>

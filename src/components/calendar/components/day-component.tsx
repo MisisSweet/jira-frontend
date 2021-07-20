@@ -66,14 +66,36 @@ export class DayComponent extends Component<DayComponentProps> {
         const currentDayClass = this.checkCurrentDay(date) ? ' calendar-day-current' : '';
         const selectedDayClass = selected ? ' calendar-day-selected' : '';
         const { open } = this.state;
+        
+        const hourWork = day?.worklog.reduce((sum,w)=>{
+            const value = w.timeSpent.split(' ').reduce(
+                (sum, value)=>{
+                    let number = parseFloat(value)
+                    let chapter = value.substr(-1)
+                    let multiplier = 1;
+                    if(chapter==='d'){
+                        multiplier = 8;
+                    }
+                    if(chapter==='m'){
+                        multiplier = 1/60;
+                    }
+                    return sum+(number*multiplier);
+                    },0
+            )
+            return sum+value},0);
+            const procesHours= hourWork?((hourWork>8)?' proces':''):'';
+            const projectHours= day?.worklog.map(w=><p key={w.id}>{w.project+' '+ w.timeSpent}</p>);
         return (
             <React.Fragment>
                 <td className={ `calendar-day`.concat(disableClass,typeDayClass,currentDayClass,selectedDayClass)} onClick={this.handleClick}>
                 <p className="calendar-day-date">
                     {date ? date.getDate() : 'x'}
                 </p>
-                <small className="calendar-day-work-hour">
-                    {day ? day.timeSpent : ''}
+                <small className={ `calendar-day-work-hour`.concat(procesHours)}>
+                    {day ? (hourWork?(hourWork<=12?hourWork:12) +" h":'') : ''}
+                </small>
+                <small className="calendar-day-work-hour-project">
+                    {day ? <div><hr></hr>{projectHours}</div>:''}
                 </small>
             </td>
             <Modal open={open} onClose={this.onCloseModal}>

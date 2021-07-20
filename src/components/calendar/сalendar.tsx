@@ -91,6 +91,7 @@ export default class Calendar extends Component<CalendarProps, CalendarState>{
                             <div className="holiday mr-1"></div><h6 className="mr-1">Выходной</h6>
                             <div className="vacation mr-1"></div><h6 className="mr-1">Отпуск</h6>
                             <div className="short mr-1"></div><h6 className="mr-1">Сокращённый</h6>
+                            <div className="proces">12h</div><h6 className="mr-1"> - переработка</h6>
                         </div>
                     </div>
                 </div>
@@ -123,10 +124,10 @@ export default class Calendar extends Component<CalendarProps, CalendarState>{
     }
 
     changeWeek = (value: number) => {
-        const { selectedMonth, selectedWeek} = this.state;
+        const {selectedWeek} = this.state;
         const { onChangeSelectedWeek } = this.props;
         var newWeek = selectedWeek + value;
-        var newMonth = selectedMonth + value;
+        // var newMonth = selectedMonth + value;
         
         // if(newMonth!==selectedMonth){
         //     this.changeMonth(newMonth-selectedMonth);

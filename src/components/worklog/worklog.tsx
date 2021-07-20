@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import './worklog.css';
 import { Comments } from '../../services/models/Worklog/comment';
 import dateformat from 'dateformat';
-import { Day } from '../../services/models/Calendar/day';
 import { Worklogs } from '../../services/models/Worklog/worklog';
 
 interface WorklogProps {

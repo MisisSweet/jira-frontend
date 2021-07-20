@@ -11,7 +11,6 @@ export const json = `[
                             {
                                 "type": 4,
                                 "day":  "2021-07-20T00:00:00.000Z",
-                                "timeSpent": "",
                                 "worklog":[
                                     {
                                         "id" : 1,
@@ -42,7 +41,6 @@ export const json = `[
                             {
                                 "type": 3,
                                 "day":  "2021-07-21T00:00:00.000Z",
-                                "timeSpent": "12h",
                                 "worklog":[
                                     {
                                         "id" : 1,
@@ -90,14 +88,13 @@ export const json = `[
                                         },
                                         "created":  "2021-07-21T00:00:00.000Z",
                                         "timeSpent": "8h",
-                                        "project": "mt-1"
+                                        "project": "mt-2"
                                     }
                                 ]
                             },
                             {
                                 "type": 2,
                                 "day":  "2021-07-22T00:00:00.000Z",
-                                "timeSpent": "7.5h",
                                 "worklog":[
                                     {
                                         "id" : 1,
@@ -128,7 +125,6 @@ export const json = `[
                             {
                                 "type": 0,
                                 "day":  "2021-07-23T00:00:00.000Z",
-                                "timeSpent": "8h",
                                 "worklog":[
                                     {
                                         "id" : 1,

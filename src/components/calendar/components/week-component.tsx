@@ -26,10 +26,12 @@ interface WeekComponentProps {
     week?: Week,
     selectedDate?: Date,
     onDayClick?: Function
+    onDayDoubleClick?: Function
+    onProjectClick?: Function
 }
 export class WeekComponent extends Component<WeekComponentProps> {
     render() {
-        const { week, firstDay, selectedDate, numberOfMonth, onDayClick } = this.props;
+        const { week, firstDay, selectedDate, numberOfMonth, onDayClick, onProjectClick, onDayDoubleClick } = this.props;
         const lastDate = addDays(firstDay, 6).getDate();
         const numberOfYaer = moment(firstDay).format('W')
         return (
@@ -52,6 +54,8 @@ export class WeekComponent extends Component<WeekComponentProps> {
                         day={week?.days.find((value: Day) => compareDates(value.day, date))}
                         date={date}
                         onClick={onDayClick}
+                        onDoubleClick={onDayDoubleClick}
+                        onClickProject={onProjectClick}
                     />
                 })}
             </tr>

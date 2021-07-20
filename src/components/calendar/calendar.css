@@ -75,7 +75,9 @@
 /*-----------------------------------------------------------------*/
 /*стили DayComponent*/
 .calendar-day{
+    position: relative;
     cursor: pointer;
+    background-color: rgb(226, 226, 226);
     border: 1px solid rgb(121, 126, 128);
     color: black;
 }
@@ -113,9 +115,19 @@
 .proces{
     color:tomato !important;
 }
-
+.calendar-day:hover .calendar-day-work-hour-project{
+    display: inline-block;
+    top:50%;
+    left:100%;
+}
 .calendar-day-work-hour-project{
-
+    position: absolute;
+    z-index: 2;
+    display: none;
+    background-color: inherit;
+    padding: 2em;
+    box-shadow: 2px 5px 5px black,-2px 5px 5px black;
+    width: max-content;
 }
 
 .calendar-day-date{

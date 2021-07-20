@@ -5,27 +5,22 @@ import MonthComponent from "./month-component";
 
 interface CalendarBodyProps {
     onChangeSelectedDate?: Function,
+    onDayDoubleClick?: Function,
+    onProjectClick?: Function,
 }
 export default class CalendarBody extends Component<CalendarBodyProps> {
 
 
     render() {
+        const { onChangeSelectedDate, onDayDoubleClick, onProjectClick } = this.props;
         return (
             <div className="calendar-body">
                 <MonthComponent
-                    onDayClick={this.handleChangeSelectedDay}
+                    onDayClick={onChangeSelectedDate}
+                    onDayDoubleClick={onDayDoubleClick}
+                    onProjectClick={onProjectClick}
                 />
             </div>
         )
-    }
-
-    handleChangeSelectedDay = (date: Date) => {
-        const { onChangeSelectedDate } = this.props
-        if (onChangeSelectedDate) {
-            onChangeSelectedDate(date);
-        }
-        this.setState({
-            selectedDate: date
-        })
     }
 }

@@ -13,6 +13,8 @@ interface CalendarProps {
     onChangeSelectedMonth?: Function,
     onChangeSelectedWeek?: Function,
     onChangeSelectedYear?: Function,
+    onDayDoubleClick?: Function,
+    onProjectClick?: Function,
 }
 interface CalendarState {
     years: Array<Year>,
@@ -43,7 +45,7 @@ export default class Calendar extends Component<CalendarProps, CalendarState>{
 
     render() {
         const { weekMode, years, selectedDate, selectedMonth, selectedWeek, selectedYear } = this.state;
-
+        const { onChangeSelectedDate, onDayDoubleClick, onProjectClick } = this.props;
         //здесь можно будет замутить локализацию
         const momentDate = moment(new Date(`${selectedYear}-${selectedMonth + 1}-1`))
         let mo = momentDate.format('MMMM');
@@ -85,7 +87,10 @@ export default class Calendar extends Component<CalendarProps, CalendarState>{
                             </div>
                             <button className="btn btn-primary" onClick={() => { this.changeWeek(1) }}>→</button>
                         </div> : ''}
-                        <CalendarBody />
+                        <CalendarBody
+                            onChangeSelectedDate={onChangeSelectedDate}
+                            onProjectClick={onProjectClick}
+                            onDayDoubleClick={onDayDoubleClick} />
                         <div className="d-flex mt-1">
                             <div className="seekday mr-1"></div><h6 className="mr-1">Sick day</h6>
                             <div className="holiday mr-1"></div><h6 className="mr-1">Выходной</h6>
@@ -124,11 +129,12 @@ export default class Calendar extends Component<CalendarProps, CalendarState>{
     }
 
     changeWeek = (value: number) => {
-        const {selectedWeek} = this.state;
+        const { selectedWeek } = this.state;
         const { onChangeSelectedWeek } = this.props;
         var newWeek = selectedWeek + value;
+        //TODO: change week
         // var newMonth = selectedMonth + value;
-        
+
         // if(newMonth!==selectedMonth){
         //     this.changeMonth(newMonth-selectedMonth);
         // }

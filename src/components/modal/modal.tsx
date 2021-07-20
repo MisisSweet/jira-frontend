@@ -1,16 +1,26 @@
 import React, { Component } from "react";
+import { Worklogs } from "../../services/models/Worklog/worklog";
 import CreateModal from "./create-modal";
 
-export default class ModalAll extends Component {
+interface ModalAllProps {
+    date: Date,
+    worklog?: Worklogs,
+    onClose?: Function,
+}
+
+export default class ModalAll extends Component<ModalAllProps> {
     state = {
         isCompleted: false
     }
     render() {
-        const { isCompleted } = this.state;
-        const modal = isCompleted ? <CreateModal /> : <CreateModal />
+        const { date, worklog, onClose } = this.props;
+        console.log({ date, worklog })
         return (
             <div>
-                {modal}
+                <CreateModal
+                    date={date}
+                    worklog={worklog}
+                    onClose={onClose} />
             </div>
         )
     }

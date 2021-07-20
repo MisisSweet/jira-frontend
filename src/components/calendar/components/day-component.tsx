@@ -1,35 +1,42 @@
-import  React, { Component } from "react";
+import React, { Component } from "react";
 import { TypeDay } from "../../../services/data/typeDay";
 import { Day } from "../../../services/models/Calendar/day";
 import "react-responsive-modal/styles.css";
-import { Modal } from "react-responsive-modal";
-import ModalAll from "../../modal/modal";
+import { Worklogs } from "../../../services/models/Worklog/worklog";
 
 interface DayComponentProps {
     date: Date,
     disable?: Boolean,
     selected?: Boolean,
     day?: Day,
-    onClick?:Function
+    onClick?: Function,
+    onDoubleClick?: Function,
+    onClickProject?: Function
 }
 export class DayComponent extends Component<DayComponentProps> {
 
-    state={
-        open: false
-    }
-    
     onCloseModal = () => {
         this.setState({ open: false });
     };
 
-    handleClick=()=>{
-        const { onClick,date } = this.props;
-        if(onClick){
+    handleClick = () => {
+        const { onClick, date } = this.props;
+        if (onClick) {
             onClick(date);
-            this.setState({ open: true });
         }
     }
-
+    handleDoubleClick = () => {
+        const { onDoubleClick, date } = this.props;
+        if (onDoubleClick) {
+            onDoubleClick(date);
+        }
+    }
+    handleClickProject = (worklog: Worklogs) => {
+        const { onClickProject, date } = this.props;
+        if (onClickProject) {
+            onClickProject(worklog, date);
+        }
+    }
     checkCurrentDay(date: Date) {
         var currentDate = new Date();
         return currentDate.getFullYear() === date.getFullYear()
@@ -60,48 +67,48 @@ export class DayComponent extends Component<DayComponentProps> {
     }
 
     render() {
-        const { date, disable,selected, day } = this.props;
+        const { date, disable, selected, day } = this.props;
         const disableClass = disable ? ' calendar-day-disable' : '';
         const typeDayClass = this.getClassOfTypeDay();
         const currentDayClass = this.checkCurrentDay(date) ? ' calendar-day-current' : '';
         const selectedDayClass = selected ? ' calendar-day-selected' : '';
-        const { open } = this.state;
-        
-        const hourWork = day?.worklog.reduce((sum,w)=>{
+
+        const hourWork = day?.worklog.reduce((sum, w) => {
             const value = w.timeSpent.split(' ').reduce(
-                (sum, value)=>{
+                (sum, value) => {
                     let number = parseFloat(value)
                     let chapter = value.substr(-1)
                     let multiplier = 1;
-                    if(chapter==='d'){
+                    if (chapter === 'd') {
                         multiplier = 8;
                     }
-                    if(chapter==='m'){
-                        multiplier = 1/60;
+                    if (chapter === 'm') {
+                        multiplier = 1 / 60;
                     }
-                    return sum+(number*multiplier);
-                    },0
+                    return sum + (number * multiplier);
+                }, 0
             )
-            return sum+value},0);
-            const procesHours= hourWork?((hourWork>8)?' proces':''):'';
-            const projectHours= day?.worklog.map(w=><p key={w.id}>{w.project+' '+ w.timeSpent}</p>);
+            return sum + value
+        }, 0);
+        const procesHours = hourWork ? ((hourWork > 8) ? ' proces' : '') : '';
+        const projectHours = day?.worklog.map(w => <div
+            key={w.id}
+            onClick={() => this.handleClickProject(w)}>{w.project + ' ' + w.timeSpent}</div>);
         return (
-            <React.Fragment>
-                <td className={ `calendar-day`.concat(disableClass,typeDayClass,currentDayClass,selectedDayClass)} onClick={this.handleClick}>
+            <td className={`calendar-day`.concat(disableClass, typeDayClass, currentDayClass, selectedDayClass)}
+                onDoubleClick={this.handleDoubleClick}
+                onClick={this.handleClick}>
                 <p className="calendar-day-date">
                     {date ? date.getDate() : 'x'}
                 </p>
-                <small className={ `calendar-day-work-hour`.concat(procesHours)}>
-                    {day ? (hourWork?(hourWork<=12?hourWork:12) +" h":'') : ''}
+                <small className={`calendar-day-work-hour`.concat(procesHours)}>
+                    {day ? (hourWork ? (hourWork <= 12 ? hourWork : 12) + " h" : '') : ''}
                 </small>
-                <small className="calendar-day-work-hour-project">
-                    {day ? <div><hr></hr>{projectHours}</div>:''}
-                </small>
+                {day ? <div className="calendar-day-work-hour-project">
+                    {projectHours}
+                </div> : ''}
             </td>
-            <Modal open={open} onClose={this.onCloseModal}>
-                <ModalAll/>
-            </Modal>
-            </React.Fragment>
         )
     }
+
 }

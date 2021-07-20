@@ -7,6 +7,8 @@ import { Year } from "../../../services/models/Calendar/year";
 import moment from "moment";
 interface MonthComponentProps {
     onDayClick?: Function
+    onDayDoubleClick?: Function
+    onProjectClick?: Function
 }
 var weeksCount = function (year: number, month_number: number) {
     var firstOfMonth = new Date(year, month_number, 1);
@@ -63,7 +65,7 @@ class MonthComponent extends Component<MonthComponentProps>{
         })
     }
     buildWeek(number: number, lastDateOfMonth: number, countWeeks: number) {
-        const { onDayClick } = this.props;
+        const { onDayClick, onProjectClick, onDayDoubleClick } = this.props;
         const { selectedDate, selectedMonth, selectedYear, years } = this.context;
         const year = years?.find((value: Year) => value.number === selectedYear)
         const month = year?.months.find((value: Month) => value.number === selectedMonth);
@@ -81,7 +83,10 @@ class MonthComponent extends Component<MonthComponentProps>{
             firstDay={firstDayOfWeek}
             week={month?.weeks.find((value: Week) => value.number === number + 1)}
             selectedDate={selectedDate}
-            onDayClick={onDayClick} />
+            onDayClick={onDayClick}
+            onDayDoubleClick={onDayDoubleClick}
+            onProjectClick={onProjectClick}
+        />
     }
 }
 

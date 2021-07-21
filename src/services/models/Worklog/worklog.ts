@@ -7,5 +7,5 @@ export type Worklogs={
     comment: Comments;
     created: Date,
     timeSpent: string;
-    project: string;
+    project?: string;
 }

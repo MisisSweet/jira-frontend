@@ -75,7 +75,7 @@ export default class View extends Component {
                                         onProjectClick={this.handleProjectClick}
                                         onDayDoubleClick={this.handleDayDoubleClick} />
                                 </div>
-                                <div className="col-sm-7 worklog-card col-5">
+                                <div className="col-sm-8 worklog-card col-5">
                                     <h6>Записать в журнал</h6>
                                     <button className="btn btn-primary" onClick={this.onOpenModal}>Записать</button>
                                     <Modal open={open} onClose={this.onCloseModal}>

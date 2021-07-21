@@ -80,8 +80,8 @@
     background-color: rgb(226, 226, 226);
     border: 1px solid rgb(121, 126, 128);
     color: black;
-    max-width: 5em;
-    min-width: 5em;
+    max-width: 4.2em;
+    min-width: 4.2em;
 }
 .calendar-day:hover *{
     font-size: 1.1em;

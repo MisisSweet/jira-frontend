@@ -62,7 +62,7 @@ export default class CreateModal extends Component<CreateModalProps, CreateModal
             }}></textarea>
         </div>
         <button className="btn btn-primary" onClick={this.handleSaveClick}> Записать</button>
-        {worklog ? <button className="btn btn-primary" onClick={this.handleDeleteClick}> Удалить</button> : ''}
+        {worklog ? <button className="btn btn-danger" onClick={this.handleDeleteClick}> Удалить</button> : ''}
       </form>
     )
   }

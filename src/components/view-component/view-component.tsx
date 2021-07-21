@@ -76,6 +76,11 @@ export default class View extends Component {
                                         onDayDoubleClick={this.handleDayDoubleClick} />
                                 </div>
                                 <div className="col-sm-7 worklog-card col-5">
+                                    <h6>Записать в журнал</h6>
+                                    <button className="btn btn-primary" onClick={this.onOpenModal}>Записать</button>
+                                    <Modal open={open} onClose={this.onCloseModal}>
+                                        <ModalAll date={selectedDateToModal} worklog={selectedWorklog} onClose={this.onCloseModal} />
+                                    </Modal>
                                     <h6>Журнал работ</h6>
                                     {years.map(
                                         (y: Year) => y.months.map(
